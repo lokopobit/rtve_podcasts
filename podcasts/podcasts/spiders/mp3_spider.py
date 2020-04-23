@@ -6,26 +6,17 @@ Created on Mon Apr 20 20:10:26 2020
 """
 
 import scrapy
-from scrapy.pipelines.files import FilesPipeline
-
-class MyFilesPipeline(FilesPipeline):
-
-    def file_path(self, request, response=None, info=None):
-        return 'files/' + 'amostu.mp3'
-    
-
 
 class mp3filesItem(scrapy.Item):
      file_urls = scrapy.Field()
      files = scrapy.Field()
-     path = scrapy.Field()
 
 class mp3_spider(scrapy.Spider):
     name = "mp3files"
 
     def start_requests(self):
-        urls = ['https://www.rtve.es/alacarta/audios/discopolis/']
-        for url in urls:
+        self.urls = ['https://www.rtve.es/alacarta/audios/discopolis/']
+        for url in self.urls:
             yield scrapy.Request(url=url, callback=self.parse_contenttable)
 
     def parse_contenttable(self, response):
@@ -45,6 +36,9 @@ class mp3_spider(scrapy.Spider):
         all_urls = response.selector.xpath('//a/@href').extract()
         mp3_urls = [url for url in all_urls if url[-3:] == 'mp3']
         mp3_dates = response.selector.xpath('//span[@class="col_fec"]/text()').getall()
+        print(mp3_dates[0])
+        #show_name = 
+        
         print('*'*60)
         print(len(mp3_urls))
         print('*'*60)
@@ -53,5 +47,5 @@ class mp3_spider(scrapy.Spider):
         file_url = 'https://mediavod-lvlt.rtve.es/resources/TE_SSALTAM/mp3/0/1/1587396441710.mp3'
         item = mp3filesItem()
         item['file_urls'] = [file_url]
-        item['path'] = 'amostu/as.mp3'
+        item['files'] = self.url[self.url.find('audios/')+len('audios/'):-1]+''
         yield item

@@ -6,10 +6,20 @@
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 
 from scrapy.pipelines.files import FilesPipeline
+from scrapy.http import Request
 
 class mp3FilesPipeline(FilesPipeline):
     def file_path(self, request, response=None, info=None):
+        print('-'*60)
+        print(request.meta)
+        print('-'*60)
         return 'files/' + 'amostu.mp3'
+        
+    def get_media_requests(self, item, info):
+        file_url = item['file_urls'][0]
+        print(file_url)
+        meta = {'filename': item['files']}
+        yield Request(url=file_url, meta=meta)
 
 class PodcastsPipeline(object):
     def process_item(self, item, spider):
