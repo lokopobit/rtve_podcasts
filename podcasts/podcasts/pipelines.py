@@ -13,7 +13,7 @@ class mp3FilesPipeline(FilesPipeline):
         print('-'*60)
         print(request.meta)
         print('-'*60)
-        return 'files/' + 'amostu.mp3'
+        return request.meta['filename']
         
     def get_media_requests(self, item, info):
         file_url = item['file_urls'][0]

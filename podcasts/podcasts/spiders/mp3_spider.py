@@ -5,6 +5,7 @@ Created on Mon Apr 20 20:10:26 2020
 @author: lokopobit
 """
 
+import os
 import scrapy
 
 class mp3filesItem(scrapy.Item):
@@ -17,9 +18,9 @@ class mp3_spider(scrapy.Spider):
     def start_requests(self):
         self.urls = ['https://www.rtve.es/alacarta/audios/discopolis/']
         for url in self.urls:
-            yield scrapy.Request(url=url, callback=self.parse_contenttable)
+            yield scrapy.Request(url=url, callback=self.find_contenttable)
 
-    def parse_contenttable(self, response):
+    def find_contenttable(self, response):
         all_urls = response.selector.xpath('//a/@href').extract()
         contenttable_urls = [u for u in all_urls if u.find('modl=TOC') != -1]
         first_contentable_url = contenttable_urls[0]
@@ -30,22 +31,22 @@ class mp3_spider(scrapy.Spider):
             urls_table.append(first_contentable_url.replace('pbq=1','pbq='+str(n)))
             
         for url_table in urls_table[:1]:
-            yield scrapy.Request(url='https://www.rtve.es'+url_table, callback=self.parse_mp3)
+            yield scrapy.Request(url='https://www.rtve.es'+url_table, callback=self.parse_contenttable)
             
-    def parse_mp3(self, response):
+    def parse_contenttable(self, response):
         all_urls = response.selector.xpath('//a/@href').extract()
+        b = [a for a in all_urls if a.find('discopolis') != -1]
+        c = [b[i].split('/')[-3] for i in list(range(0,len(b),2))]
+        print('*'*60)
+        print(c[:4])
+        print('*'*60)
         mp3_urls = [url for url in all_urls if url[-3:] == 'mp3']
         mp3_dates = response.selector.xpath('//span[@class="col_fec"]/text()').getall()
-        print(mp3_dates[0])
-        #show_name = 
-        
-        print('*'*60)
-        print(len(mp3_urls))
-        print('*'*60)
-        print(len(mp3_dates))
-        print('*'*60)
-        file_url = 'https://mediavod-lvlt.rtve.es/resources/TE_SSALTAM/mp3/0/1/1587396441710.mp3'
-        item = mp3filesItem()
-        item['file_urls'] = [file_url]
-        item['files'] = self.url[self.url.find('audios/')+len('audios/'):-1]+''
-        yield item
+        mp3_dates = [mp3d.replace(' ','') for mp3d in mp3_dates]
+        for mp3_url in mp3_urls[:1]:
+            item = mp3filesItem()
+            item['file_urls'] = [mp3_url]
+            path = self.urls[0][self.urls[0].find('audios/')+len('audios/'):-1]
+            filename = mp3_dates[mp3_urls.index(mp3_url)]+'.mp3'
+            item['files'] = os.path.join(path, filename)
+            yield item
