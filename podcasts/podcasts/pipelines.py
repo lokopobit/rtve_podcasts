@@ -10,14 +10,10 @@ from scrapy.http import Request
 
 class mp3FilesPipeline(FilesPipeline):
     def file_path(self, request, response=None, info=None):
-        print('-'*60)
-        print(request.meta)
-        print('-'*60)
         return request.meta['filename']
         
     def get_media_requests(self, item, info):
         file_url = item['file_urls'][0]
-        print(file_url)
         meta = {'filename': item['files']}
         yield Request(url=file_url, meta=meta)
 

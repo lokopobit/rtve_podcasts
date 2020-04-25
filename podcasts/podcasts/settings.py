@@ -13,7 +13,10 @@ BOT_NAME = 'podcasts'
 
 SPIDER_MODULES = ['podcasts.spiders']
 NEWSPIDER_MODULE = 'podcasts.spiders'
-
+DOWNLOAD_MAXSIZE = 0
+DOWNLOAD_WARNSIZE = 0
+DOWNLOAD_TIMEOUT = 100000
+COMPRESSION_ENABLED = False
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'podcasts (+http://www.yourdomain.com)'
