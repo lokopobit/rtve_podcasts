@@ -36,7 +36,7 @@ class mp3_spider(scrapy.Spider):
         for n in range(1,max(page_numbers)+1):
             urls_table.append(first_contentable_url.replace('pbq=1','pbq='+str(n)))
             
-        for url_table in list(reversed(urls_table)): # [:10] 
+        for url_table in list(reversed(urls_table))[:-1]: # [:10] 
             yield scrapy.Request(url='https://www.rtve.es'+url_table, callback=self.parse_contenttable)
             
     def parse_contenttable(self, response):
