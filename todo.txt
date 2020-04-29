@@ -1,0 +1,4 @@
+make reference to the other github project
+indicar folder settings en how to use
+join csvs
+coompress mp3 files --> https://github.com/schnaader/precomp-cpp
