@@ -2,3 +2,7 @@ make reference to the other github project
 indicar folder settings en how to use
 join csvs
 coompress mp3 files --> https://github.com/schnaader/precomp-cpp
+radio music ripping
+aubio feature extractor	-- fast audio loading python (audiofile)
+essentia feature extractor
+speaker recognition
