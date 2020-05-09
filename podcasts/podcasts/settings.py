@@ -76,7 +76,7 @@ DOWNLOAD_DELAY = 5
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {'scrapy.pipelines.files.FilesPipeline': 1}
 ITEM_PIPELINES = {'podcasts.pipelines.mp3FilesPipeline':1}
-FILES_STORE = ''
+FILES_STORE = 'C:\\Users\\juan\\Desktop\\rtve_podcasts\\data'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
