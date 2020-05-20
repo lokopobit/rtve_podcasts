@@ -18,10 +18,15 @@ class mp3_spider(scrapy.Spider):
     name = "mp3files"
 
     def start_requests(self):
+        # 'https://www.rtve.es/alacarta/audios/cuando-los-elefantes-suenan-con-la-musica/'
         # 'https://www.rtve.es/alacarta/audios/discopolis/'  
+        # 'https://www.rtve.es/alacarta/audios/flor-de-pasion/'
+        # 'https://www.rtve.es/alacarta/audios/cafe-del-sur/'
+        # 'https://www.rtve.es/alacarta/audios/capitan-demo/'
+        
         self.settings = get_project_settings()
         self.path = self.settings.get('FILES_STORE')
-        self.urls = ['https://www.rtve.es/alacarta/audios/cuando-los-elefantes-suenan-con-la-musica/']
+        self.urls = ['https://www.rtve.es/alacarta/audios/flor-de-pasion/']
         self.name = self.urls[0].split('/')[-2]
         for url in self.urls:
             yield scrapy.Request(url=url, callback=self.find_contenttable)
@@ -36,7 +41,7 @@ class mp3_spider(scrapy.Spider):
         for n in range(1,max(page_numbers)+1):
             urls_table.append(first_contentable_url.replace('pbq=1','pbq='+str(n)))
             
-        for url_table in list(reversed(urls_table))[:-1]: # [:10] 
+        for url_table in list(reversed(urls_table))[:75]: # [:10] # [:-1]
             yield scrapy.Request(url='https://www.rtve.es'+url_table, callback=self.parse_contenttable)
             
     def parse_contenttable(self, response):
