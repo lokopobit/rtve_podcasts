@@ -83,9 +83,13 @@ def decompress_mp3(already_compressed, data_path, mp3_names, remove_pcf = False)
 
 # Compress and remove 
 data_path = r'C:\Users\juan\Desktop\rtve_podcasts\data\discopolis'
+#data_path = r'C:\Users\juan\Desktop\rtve_podcasts\data\cuando-los-elefantes-suenan-con-la-musica'
+#data_path = r'C:\Users\juan\Desktop\rtve_podcasts\data\flor-de-pasion'
 already_compressed = [f for f in os.listdir(data_path) if f[-3:] == 'pcf']
 mp3_names = [f for f in os.listdir(data_path) if f[-3:] == 'mp3']
-compress_mp3(already_compressed, data_path, mp3_names[:30], remove_mp3 = True)
+for i in list(range(30,len(mp3_names)-60,30)):
+    mp3_names = [f for f in os.listdir(data_path) if f[-3:] == 'mp3']
+    compress_mp3(already_compressed, data_path, mp3_names[:30], remove_mp3 = True)
 #decompress_mp3(already_compressed, data_path, mp3_names, remove_pcf = True)
 
 
