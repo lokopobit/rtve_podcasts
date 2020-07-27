@@ -20,7 +20,7 @@ For those willing to download some radio shows but don't want to bother the web 
 > 4. Open a terminal in the folder rtve\_podcasts/podcasts/podcasts and execute scrapy crawl mp3files.
 
 ## Implementation Details
-A scrapy spider with 5 seconds delay per download. The filename of the sound files is the date of emission, so a csv file relating the date and the show name is also saved in the folder. Then, the csv are joined into one and the mp3 files compressed with [https://github.com/schnaader/precomp-cpp](https://github.com/schnaader/precomp-cpp).   
+A scrapy spider with 5 seconds delay per download. The filename of the sound files is the date of emission, so a csv file relating the date and the show name is also saved in the folder. Then, the csv are joined into one and the mp3 files compressed with [precomp](https://github.com/schnaader/precomp-cpp).   
 
 
 ## Why did I Decided to Create this Crawler?
