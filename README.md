@@ -20,12 +20,11 @@ For those willing to download some radio shows but don't want to bother the web 
 > 4. Open a terminal in the folder rtve\_podcasts/podcasts/podcasts and execute scrapy crawl mp3files.
 
 ## Implementation Details
-A scrapy spider with 5 seconds delay per download. The filename of the sound files is the date of emission, so a csv file relating the date and the show name is also saved in the folder. In the future I will provide a small function to join all these csv files into one.  
+A scrapy spider with 5 seconds delay per download. The filename of the sound files is the date of emission, so a csv file relating the date and the show name is also saved in the folder. Then, the csv are joined into one and the mp3 files compressed with [https://github.com/schnaader/precomp-cpp](https://github.com/schnaader/precomp-cpp).   
 
 
 ## Why did I Decided to Create this Crawler?
 I like a lot the music played in these radio shows, so I decided to download them so I could listen to them offline. Before creating this spider I searched if already somebody have done it and uploaded to github. I found one repository ([https://github.com/garciadelcastillo/Documentos-RNE](https://github.com/garciadelcastillo/Documentos-RNE)) but I could not manage to make it work so I opened an issue (the repository was no longer under maintenance and 3 years ago last updated).
 
-## Future work
-First of all, given that the audio files size is around 100Mb we can use this repository to reduce the size: [https://github.com/schnaader/precomp-cpp](https://github.com/schnaader/precomp-cpp).  
+## Future work 
 I would also like to do some data analysis with all the mp3 files. For example, split them to remove the intro and the talker voice to recover the songs, so that the size can be reduced. To achieve this task I tried music ripping open source available technologies but I was not able to split the audio files as desired. I also tried speaker recognition but any result was achieved. Finally, I will wait to buy a GPU and make the software to split the files by my own. 
