@@ -1,5 +1,3 @@
-# rtve_podcasts
-Scraper of the podcasts of radio3 (music) of www.rtve.es 
 
 ## What is this repository?
 RTVE is the acronym for "radio television española", that is, the public service for radio and television in Spain. Radio3 is the section dedicated to music, which offers programming 24/7. All the issued radio shows are stored in www.rtve.es under the name podcasts. So, this repository is a scraper of this shows, with its corresponding storing folder structure.
@@ -16,7 +14,7 @@ For those willing to download some radio shows but don't want to bother the web 
 ## How to Use
 > 1. Install the requiered packages: scrapy, pandas and scrapy-fake-useragent. 
 > 2. Set up the path where the files will be saved. To do that paste the absolute path of the folder in the variable FILES\_STORE of the settings.py file (rtve\_podcasts/podcasts/podcasts).  
-> 3. Paste the podcasts urls inside the self.urls list in the mp3_spider.py script (rtve\_podcasts/podcasts/podcasts/spiders). There is an example provided; the url of the radio show "cuando los elefantes sueñan con la musica".  
+> 3. Paste the podcasts urls inside the self.urls list in the mp3_spider.py script (rtve\_podcasts/podcasts/podcasts/spiders). There are examples provided.
 > 4. Open a terminal in the folder rtve\_podcasts/podcasts/podcasts and execute scrapy crawl mp3files.
 
 ## Implementation Details

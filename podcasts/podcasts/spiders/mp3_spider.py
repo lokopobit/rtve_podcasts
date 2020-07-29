@@ -23,10 +23,11 @@ class mp3_spider(scrapy.Spider):
         # 'https://www.rtve.es/alacarta/audios/flor-de-pasion/'
         # 'https://www.rtve.es/alacarta/audios/cafe-del-sur/'
         # 'https://www.rtve.es/alacarta/audios/capitan-demo/'
+        # 'https://www.rtve.es/alacarta/audios/discopolis-europeo/'
         
         self.settings = get_project_settings()
         self.path = self.settings.get('FILES_STORE')
-        self.urls = ['https://www.rtve.es/alacarta/audios/flor-de-pasion/']
+        self.urls = ['https://www.rtve.es/alacarta/audios/discopolis-europeo/']
         self.name = self.urls[0].split('/')[-2]
         for url in self.urls:
             yield scrapy.Request(url=url, callback=self.find_contenttable)
