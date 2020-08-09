@@ -2,3 +2,4 @@ radio music ripping
 aubio feature extractor	-- fast audio loading python (audiofile)
 essentia feature extractor
 speaker recognition
+commit precomp and write note in readme
